@@ -9,6 +9,10 @@ import Foundation
 import Vapor
 import HTTP
 
+#if swift(>=5.1.1)
+import FoundationNetworking
+#endif
+
 extension S3 {
     
     /// Make an S3 request
