@@ -37,6 +37,6 @@ public struct ListInfo: Content {
     enum CodingKeys: String, CodingKey {
         case listType = "list-type"
         case continuationToken = "ContinuationToken"
-        case prefix = "Prefix"
+        case prefix
     }
 }
