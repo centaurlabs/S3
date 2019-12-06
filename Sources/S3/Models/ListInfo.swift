@@ -9,10 +9,12 @@ public struct ListInfo: Content {
     private let listType: String = "2"
     public let continuationToken: String?
     public let prefix: String?
+    public let startAfter: String?
     
-    public init(continuationToken: String? = nil, prefix: String? = nil) {
+    public init(continuationToken: String? = nil, prefix: String? = nil, startAfter: String? = nil) {
         self.continuationToken = continuationToken
         self.prefix = prefix
+        self.startAfter = startAfter
     }
     
     public static var `default`: ListInfo {
@@ -30,13 +32,18 @@ public struct ListInfo: Content {
             items.append(URLQueryItem(name: CodingKeys.prefix.rawValue, value: prefix))
         }
         
+        if let startAfter = startAfter {
+            items.append(URLQueryItem(name: CodingKeys.startAfter.rawValue, value: startAfter))
+        }
+        
         return items
     }
     
     /// Coding keys
     enum CodingKeys: String, CodingKey {
         case listType = "list-type"
-        case continuationToken = "ContinuationToken"
+        case continuationToken = "continuation-token"
+        case startAfter = "start-after"
         case prefix
     }
 }
