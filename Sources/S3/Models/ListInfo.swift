@@ -10,11 +10,13 @@ public struct ListInfo: Content {
     public let continuationToken: String?
     public let prefix: String?
     public let startAfter: String?
+    public let maxKeys: Int?
     
-    public init(continuationToken: String? = nil, prefix: String? = nil, startAfter: String? = nil) {
+    public init(continuationToken: String? = nil, prefix: String? = nil, startAfter: String? = nil, maxKeys: Int? = nil) {
         self.continuationToken = continuationToken
         self.prefix = prefix
         self.startAfter = startAfter
+        self.maxKeys = maxKeys
     }
     
     public static var `default`: ListInfo {
@@ -36,6 +38,10 @@ public struct ListInfo: Content {
             items.append(URLQueryItem(name: CodingKeys.startAfter.rawValue, value: startAfter))
         }
         
+        if let maxKeys = maxKeys {
+            items.append(URLQueryItem(name: CodingKeys.maxKeys.rawValue, value: String(maxKeys)))
+        }
+        
         return items
     }
     
@@ -45,5 +51,6 @@ public struct ListInfo: Content {
         case continuationToken = "continuation-token"
         case startAfter = "start-after"
         case prefix
+        case maxKeys = "max-keys"
     }
 }
